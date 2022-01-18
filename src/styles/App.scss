@@ -11,7 +11,7 @@
   margin-left: 30px;
   display: flex;
   &__title {
-    font-family: "Hind", sans-serif;
+    font-family:"Comfortaa", cursive;
     color: rgb(15, 167, 108);
     font-size: 30px;
     margin-left: 30px;
@@ -69,9 +69,11 @@
   }
   &__filter {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    justify-content: flex-end;
+    margin-right: 50px;
+    font-size: 17px;
     &--input {
+      margin-left: 30px;
       border-radius: 13px;
       border: solid 1px rgb(15, 167, 108);
       height: 20px;
@@ -83,6 +85,10 @@
 .table {
   font-family: "Hind", sans-serif;
   &__thead {
-    background-color: rgb(177, 177, 177);
+    background-color: rgb(212, 209, 209)
+  }
+  &__th {
+      width: 500px;
+      border-bottom: solid 1px rgb(15, 167, 108);
   }
 }

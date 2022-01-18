@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import callToApi from '../services/api';
 import "../styles/App.scss";
 
 function App() {
@@ -26,9 +25,9 @@ function App() {
   )
   const htmlAdalabers = filterData.map((adalaber) => (
     <tr key={adalaber.id}>
-      <th>{adalaber.name}</th>
-      <th>{adalaber.counselor}</th>
-      <th>{adalaber.speciality}</th>
+      <th className="table__th">{adalaber.name}</th>
+      <th className="table__th">{adalaber.counselor}</th>
+      <th className="table__th">{adalaber.speciality}</th>
     </tr>
   ));
   const handleNewStudent = (ev) => {
@@ -42,9 +41,9 @@ function App() {
 
   const htmlNewStudent = newStudents.map((student, index) => (
     <tr key={index}>
-      <th>{student.name}</th>
-      <th>{student.tutor}</th>
-      <th>{student.speciality}</th>
+      <th className="table__th">{student.name}</th>
+      <th className="table__th">{student.tutor}</th>
+      <th className="table__th">{student.speciality}</th>
     </tr>
   ));
 
@@ -64,18 +63,7 @@ function App() {
       <main>
         <section>
           <form action=""  className="form__filter" onSubmit={handleSubmitForm}>
-          <label htmlFor="filter" className="form__filter--label">Filtar por tutora: 
-              <select
-                name="filter"
-                id="filter"
-                className="form__filter--selector">
-                <option value="todas">Todas</option>
-                <option value="dayana">Dayana</option>
-                <option value="yanelis">Yanelis</option>
-                <option value="ivan">Iván</option>
-              </select>
-            </label>
-            <label htmlFor="filter"> filtrar por nombre:</label>
+           <label htmlFor="filter"> Filtrar por nombre:</label>
           <input type="search" 
           autoComplete="off"
           name="filter"
@@ -87,9 +75,9 @@ function App() {
           <table className="table">
             <thead className="table__thead">
               <tr>
-                <th>Nombre</th>
-                <th>Tutora</th>
-                <th>Especialidad</th>
+                <th className="table__th">Nombre</th>
+                <th className="table__th">Tutora</th>
+                <th className="table__th">Especialidad</th>
                 
               </tr>
             </thead>

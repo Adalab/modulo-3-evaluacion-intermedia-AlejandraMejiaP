@@ -1,5 +1,6 @@
 {
   "name": "3.1-mi-primera-web",
+  "githubpages": "rm -rf build && rm -rf docs && npm run build && mv build docs && git add docs/* && git commit -m \"Publish in GitHub Pages\" && git push",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
