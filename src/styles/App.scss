@@ -47,25 +47,42 @@
     font-family: "Hind", sans-serif;
     color: rgb(95, 95, 95);
     padding: 5px;
-    &--timetable {
-      font-size: 25px;
-    }
+    &--title {
+        font-size: 25px;
+      }}
+  &__filter {
+    display: flex;
+    font-family: "Hind", sans-serif;
+    color: rgb(95, 95, 95);
+    padding: 5px;
     &--title {
       font-size: 25px;
     }
     &--selector {
-      width: 150px;
+      width: 130px;
       border-radius: 13px;
+      height: 25px;
       font-family: "Hind", sans-serif;
       padding: 3px;
       margin-left: 10px;
     }
   }
+  &__filter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    &--input {
+      border-radius: 13px;
+      border: solid 1px rgb(15, 167, 108);
+      height: 20px;
+      width: 130px;
+    }
+  }
 }
 
 .table {
-    font-family: "Hind", sans-serif;
-    &__thead {
-        background-color: rgb(177, 177, 177);
-            }
+  font-family: "Hind", sans-serif;
+  &__thead {
+    background-color: rgb(177, 177, 177);
+  }
 }
