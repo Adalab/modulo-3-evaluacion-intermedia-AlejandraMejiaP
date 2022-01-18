@@ -71,6 +71,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin-right: 100px;
     &--input {
       border-radius: 13px;
       border: solid 1px rgb(15, 167, 108);
@@ -84,5 +85,8 @@
   font-family: "Hind", sans-serif;
   &__thead {
     background-color: rgb(177, 177, 177);
+  }
+  &__th {
+      width: 300px;
   }
 }
