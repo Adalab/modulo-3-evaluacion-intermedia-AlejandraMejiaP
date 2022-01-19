@@ -1,15 +1,13 @@
-// Fichero src/services/api.js
 const callToApi = () => {
-    // Llamamos al API
-    return fetch('https://swapi.dev/api/people/5') // Este 5 es el id de Leia Skywalker
-      .then(response => response.json())
-      .then(response => {
-        // Cuando responde el API podemos limpiar los datos aquí
-        const result = {
-          name: response.name,
-          };
-        return result;
-      });
+  // Llamamos al API
+  return fetch(
+  "https://beta.adalab.es/pw-recursos/apis/adalabers-v1/promo-patata.json"
+  )
+  .then((response) => response.json())
+  .then((dataFromApi) => {
+    return dataFromApi.results;
+  
+  });
   };
   
-  export default callToApi;
+  export default callToApi; 

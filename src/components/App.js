@@ -1,41 +1,47 @@
 import { useEffect, useState } from "react";
-// import callToApi from '../services/api';
+import callToApi from "../services/api";
 import "../styles/App.scss";
 
 function App() {
   const [adalabersData, setAdalabersData] = useState([]);
   const [newStudents, setNewStudents] = useState([]);
   const [search, setSearch] = useState("");
-  const [tutorFilter, setTutorFilter] = useState("");
+  const [tutorFilter, setTutorFilter] = useState("all");
   const [data, setData] = useState({
     name: "",
     speciality: "",
     tutor: "",
   });
-  useEffect(() => {
-    fetch(
-      "https://beta.adalab.es/pw-recursos/apis/adalabers-v1/promo-patata.json"
-    )
-      .then((response) => response.json())
-      .then((dataFromApi) => {
-        setAdalabersData(dataFromApi.results);
-      });
-  }, []);
-  const handleFilterTutor = (ev) => {
-    const filterSelected = ev.currentTarget.value;
-    setTutorFilter(filterSelected);
-  };
 
-  const filterData =  adalabersData.filter((result) =>
-    result.name.toLowerCase().includes(search.toLowerCase())
-  );
-  const htmlAdalabers = filterData.map((adalaber) => (
-    <tr key={adalaber.id}>
-      <th className="table__th">{adalaber.name}</th>
-      <th className="table__th">{adalaber.counselor}</th>
-      <th className="table__th">{adalaber.speciality}</th>
-    </tr>
-  ));
+  useEffect(() => {
+    callToApi().then((dataFromApi) => {
+      setAdalabersData(dataFromApi);
+      
+    });
+  }, []);
+
+
+  
+
+   const htmlAdalabers = adalabersData
+    .filter((result) =>
+      result.name.toLowerCase().includes(search.toLowerCase())
+    )
+    .filter((eachAdalaber) => {
+      if (tutorFilter === "all") {
+        return true;
+      } else {
+        return eachAdalaber.counselor === tutorFilter;
+      }
+    })
+    .map((adalaber) => (
+      <tr key={adalaber.id}>
+        <th className="table__th">{adalaber.name}</th>
+        <th className="table__th">{adalaber.counselor}</th>
+        <th className="table__th">{adalaber.speciality}</th>
+      </tr>
+    ));
+
   const handleNewStudent = (ev) => {
     const newData = ev.currentTarget.name;
     setData({ ...data, [newData]: ev.currentTarget.value });
@@ -45,6 +51,17 @@ function App() {
     setNewStudents([...newStudents, data]);
   };
 
+  const handleChangeSearch = (ev) => {
+    setSearch(ev.currentTarget.value);
+  };
+  const handleFilterTutor = (ev) => {
+    const filterSelected = ev.currentTarget.value;
+    setTutorFilter(filterSelected);
+  };
+  const handleSubmitForm = (ev) => {
+    ev.preventDefault();
+  };
+
   const htmlNewStudent = newStudents.map((student, index) => (
     <tr key={index}>
       <th className="table__th">{student.name}</th>
@@ -52,14 +69,7 @@ function App() {
       <th className="table__th">{student.speciality}</th>
     </tr>
   ));
-
-  const handleChangeSearch = (ev) => {
-    setSearch(ev.currentTarget.value);
-  };
-
-  const handleSubmitForm = (ev) => {
-    ev.preventDefault();
-  };
+  
 
   return (
     <div className="App">
@@ -77,10 +87,10 @@ function App() {
                 className="form__filter--selector"
                 onClick={handleFilterTutor}
               >
-                <option value="todas">Todas</option>
-                <option value="dayana">Dayana</option>
-                <option value="yanelis">Yanelis</option>
-                <option value="ivan">Iván</option>
+                <option value="all">Todas</option>
+                <option value="Dayana">Dayana</option>
+                <option value="Yanelis">Yanelis</option>
+                <option value="Iván">Iván</option>
               </select>
             </label>
             <label htmlFor="filter"> filtrar por nombre:</label>
@@ -104,6 +114,7 @@ function App() {
             <tbody>
               {htmlAdalabers}
               {htmlNewStudent}
+              
             </tbody>
           </table>
         </section>
