@@ -1,3 +1,7 @@
+ul {
+  list-style: none;
+}
+
 .header {
   &__title {
     font-family: "Comfortaa", cursive;
@@ -69,9 +73,15 @@
   }
   &__filter {
     display: flex;
+<<<<<<< HEAD
     justify-content: flex-end;
     margin-right: 50px;
     font-size: 17px;
+=======
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 100px;
+>>>>>>> bonus
     &--input {
       margin-left: 30px;
       border-radius: 13px;
@@ -90,5 +100,8 @@
   &__th {
       width: 500px;
       border-bottom: solid 1px rgb(15, 167, 108);
+  }
+  &__th {
+      width: 300px;
   }
 }

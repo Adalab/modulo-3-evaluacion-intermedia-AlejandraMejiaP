@@ -1,25 +1,28 @@
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
+=======
+import callToApi from "../services/api";
+>>>>>>> bonus
 import "../styles/App.scss";
 
 function App() {
   const [adalabersData, setAdalabersData] = useState([]);
   const [newStudents, setNewStudents] = useState([]);
   const [search, setSearch] = useState("");
+  const [tutorFilter, setTutorFilter] = useState("all");
   const [data, setData] = useState({
     name: "",
     speciality: "",
     tutor: "",
   });
+
   useEffect(() => {
-    fetch(
-      "https://beta.adalab.es/pw-recursos/apis/adalabers-v1/promo-patata.json"
-    )
-      .then((response) => response.json())
-      .then((dataFromApi) => {
-        setAdalabersData(dataFromApi.results);
-      });
+    callToApi().then((dataFromApi) => {
+      setAdalabersData(dataFromApi);
+    });
   }, []);
 
+<<<<<<< HEAD
   const filterData = adalabersData.filter((result)=>
   result.name.toLowerCase().includes(search.toLowerCase())
   )
@@ -30,6 +33,29 @@ function App() {
       <th className="table__th">{adalaber.speciality}</th>
     </tr>
   ));
+=======
+
+
+  const htmlAdalabers = adalabersData
+    .filter((result) =>
+      result.name.toLowerCase().includes(search.toLowerCase())
+    )
+    .filter((eachAdalaber) => {
+      if (tutorFilter === "all") {
+        return true;
+      } else {
+        return eachAdalaber.counselor === tutorFilter;
+      }
+    })
+    .map((adalaber,i) => {
+      return <tr key={i}>
+<th className="table__th">{adalaber.name}</th>
+<th className="table__th">{adalaber.counselor}</th>
+<th className="table__th">{adalaber.speciality}</th> 
+<th className="table__th"> {adalaber.social_networks}  </th>
+</tr>});
+
+>>>>>>> bonus
   const handleNewStudent = (ev) => {
     const newData = ev.currentTarget.name;
     setData({ ...data, [newData]: ev.currentTarget.value });
@@ -37,6 +63,28 @@ function App() {
 
   const handleAddStudent = () => {
     setNewStudents([...newStudents, data]);
+  };
+
+<<<<<<< HEAD
+  const htmlNewStudent = newStudents.map((student, index) => (
+    <tr key={index}>
+      <th className="table__th">{student.name}</th>
+      <th className="table__th">{student.tutor}</th>
+      <th className="table__th">{student.speciality}</th>
+    </tr>
+  ));
+
+=======
+>>>>>>> bonus
+  const handleChangeSearch = (ev) => {
+    setSearch(ev.currentTarget.value);
+  };
+  const handleFilterTutor = (ev) => {
+    const filterSelected = ev.currentTarget.value;
+    setTutorFilter(filterSelected);
+  };
+  const handleSubmitForm = (ev) => {
+    ev.preventDefault();
   };
 
   const htmlNewStudent = newStudents.map((student, index) => (
@@ -47,14 +95,6 @@ function App() {
     </tr>
   ));
 
-  const handleChangeSearch = (ev) => {
-    setSearch(ev.currentTarget.value);
-  }
-
-  const handleSubmitForm = (ev) => {
-    ev.preventDefault();
-  };
-
   return (
     <div className="App">
       <header className="header">
@@ -62,6 +102,7 @@ function App() {
       </header>
       <main>
         <section>
+<<<<<<< HEAD
           <form action=""  className="form__filter" onSubmit={handleSubmitForm}>
            <label htmlFor="filter"> Filtrar por nombre:</label>
           <input type="search" 
@@ -71,6 +112,32 @@ function App() {
           value={search} 
           onChange={handleChangeSearch}
           />
+=======
+          <form action="" className="form__filter" onSubmit={handleSubmitForm}>
+            <label htmlFor="filter" className="form__filter--label">
+              Filtar por tutora:
+              <select
+                name="filter"
+                id="filter"
+                className="form__filter--selector"
+                onClick={handleFilterTutor}
+              >
+                <option value="all">Todas</option>
+                <option value="Dayana">Dayana</option>
+                <option value="Yanelis">Yanelis</option>
+                <option value="Iván">Iván</option>
+              </select>
+            </label>
+            <label htmlFor="filter"> filtrar por nombre:</label>
+            <input
+              type="search"
+              autoComplete="off"
+              name="filter"
+              className="form__filter--input"
+              value={search}
+              onChange={handleChangeSearch}
+            />
+>>>>>>> bonus
           </form>
           <table className="table">
             <thead className="table__thead">
@@ -78,7 +145,11 @@ function App() {
                 <th className="table__th">Nombre</th>
                 <th className="table__th">Tutora</th>
                 <th className="table__th">Especialidad</th>
+<<<<<<< HEAD
                 
+=======
+                <th className="table__th">Redes Sociales</th>
+>>>>>>> bonus
               </tr>
             </thead>
             <tbody>
