@@ -16,14 +16,12 @@ function App() {
   useEffect(() => {
     callToApi().then((dataFromApi) => {
       setAdalabersData(dataFromApi);
-      
     });
   }, []);
 
 
-  
 
-   const htmlAdalabers = adalabersData
+  const htmlAdalabers = adalabersData
     .filter((result) =>
       result.name.toLowerCase().includes(search.toLowerCase())
     )
@@ -34,13 +32,13 @@ function App() {
         return eachAdalaber.counselor === tutorFilter;
       }
     })
-    .map((adalaber) => (
-      <tr key={adalaber.id}>
-        <th className="table__th">{adalaber.name}</th>
-        <th className="table__th">{adalaber.counselor}</th>
-        <th className="table__th">{adalaber.speciality}</th>
-      </tr>
-    ));
+    .map((adalaber,i) => {
+      return <tr key={i}>
+<th className="table__th">{adalaber.name}</th>
+<th className="table__th">{adalaber.counselor}</th>
+<th className="table__th">{adalaber.speciality}</th> 
+<th className="table__th"> {adalaber.social_networks}  </th>
+</tr>});
 
   const handleNewStudent = (ev) => {
     const newData = ev.currentTarget.name;
@@ -69,7 +67,6 @@ function App() {
       <th className="table__th">{student.speciality}</th>
     </tr>
   ));
-  
 
   return (
     <div className="App">
@@ -109,12 +106,12 @@ function App() {
                 <th className="table__th">Nombre</th>
                 <th className="table__th">Tutora</th>
                 <th className="table__th">Especialidad</th>
+                <th className="table__th">Redes Sociales</th>
               </tr>
             </thead>
             <tbody>
               {htmlAdalabers}
               {htmlNewStudent}
-              
             </tbody>
           </table>
         </section>
