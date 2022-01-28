@@ -11,6 +11,7 @@ function App() {
     name: "",
     speciality: "",
     tutor: "",
+    social_networks: "",
   });
 
   useEffect(() => {
@@ -43,10 +44,16 @@ function App() {
   const handleNewStudent = (ev) => {
     const newData = ev.currentTarget.name;
     setData({ ...data, [newData]: ev.currentTarget.value });
+
   };
 
   const handleAddStudent = () => {
     setNewStudents([...newStudents, data]);
+    setData({ name: "",
+    speciality: "",
+    tutor: "",
+    social_networks:"",})
+   
   };
 
   const handleChangeSearch = (ev) => {
@@ -65,6 +72,7 @@ function App() {
       <th className="table__th">{student.name}</th>
       <th className="table__th">{student.tutor}</th>
       <th className="table__th">{student.speciality}</th>
+      <th className="table__th"> {student.social_networks}  </th>
     </tr>
   ));
 
@@ -159,6 +167,20 @@ function App() {
               id="newStudent"
               className="form__input"
               value={data.speciality}
+              onChange={handleNewStudent}
+            />
+            <label
+              htmlFor="newStudent"
+              className="form__label form__label--title"
+            >
+              Redes sociales:
+            </label>
+            <input
+              type="text"
+              name="social_networks"
+              id="newStudent"
+              className="form__input"
+              value={data.social_networks}
               onChange={handleNewStudent}
             />
             <button className="form__button" onClick={handleAddStudent}>
